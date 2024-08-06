@@ -1,0 +1,12 @@
+Flask==2.2.2
+Flask-JWT-Extended==4.4.4
+Flask-Migrate==4.0.2
+flask-restx==1.0.3
+gunicorn==20.1.0
+pytest==7.2.1
+python-decouple==3.7
+python-dotenv==0.21.0
+SQLAlchemy==1.4.46
+marshmallow
+Werkzeug==2.2.2
+psycopg2
