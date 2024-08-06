@@ -10,3 +10,4 @@ SQLAlchemy==1.4.46
 marshmallow
 Werkzeug==2.2.2
 psycopg2
+pytest
