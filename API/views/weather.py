@@ -3,11 +3,14 @@ from ..models import Weather
 from ..schema import weatherNameSpace,weatherSerializer
 
 
+
 @weatherNameSpace.route("")
 class PostWeatherUpdate(Resource):
 
     @weatherNameSpace.expect(weatherSerializer)
-
+    @weatherNameSpace.response(201,"weather update created",weatherSerializer)
+    @weatherNameSpace.response(400,"missing required fields")
+    @weatherNameSpace.response(500,"an error occured while creating the weather update")
     def post(self):
         """ creating weather update"""
         try:
@@ -27,9 +30,15 @@ class PostWeatherUpdate(Resource):
             return {"message": "An error occurred while creating the weather report"}, 500
 
 
+
 @weatherNameSpace.route("/<city>")
 class GetWeatherUpdate(Resource):
+
+    @weatherNameSpace.response(200,"successful",weatherSerializer)
+    @weatherNameSpace.response(404,"the city is not on the database")
     def get(self,city):
+            """get the weather update of a particular city"""
+
             weatherUpdate=Weather.query.filter(Weather.city==city).first()
             if weatherUpdate is not None:
                 return  weatherNameSpace.marshal(weatherUpdate, weatherSerializer),200
